@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/enviar', [EmailController::class, 'testeEmail']);
+Route::get('/enviar', [EmailController::class, 'send']);
