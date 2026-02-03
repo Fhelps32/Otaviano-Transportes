@@ -1,4 +1,5 @@
 import HeroCarousel from "../../components/Carousel";
+import { useState } from "react";
 import {
   Clock3,
   Shield,
@@ -10,9 +11,136 @@ import {
   Wrench,
   Search,
   MessageCircle,
+  ChevronDown,
   PackageCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+export function AbrangenciaSection() {
+  const [openAccordion, setOpenAccordion] = useState(null);
+
+  const toggleAccordion = (id) => {
+    if (window.innerWidth < 768) {
+      setOpenAccordion(openAccordion === id ? null : id);
+    }
+  };
+
+  const estados = [
+    "Rio de Janeiro",
+    "São Paulo",
+    "Minas Gerais",
+    "Espírito Santo",
+    "Bahia",
+    "Goiás",
+    "Distrito Federal",
+    "Paraná",
+    "Santa Catarina",
+    "Rio Grande do Sul",
+    "Mato Grosso",
+    "Mato Grosso do Sul",
+    "Tocantins",
+    "Sergipe",
+  ];
+
+  const rotas = [
+    "Rio de Janeiro ↔ São Paulo",
+    "Belo Horizonte ↔ Vitória",
+    "Salvador ↔ Brasília",
+    "Curitiba ↔ Porto Alegre",
+    "Goiânia ↔ Campo Grande",
+    "E muitas outras rotas",
+  ];
+
+  return (
+    <section className="w-full py-16">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-extrabold text-black md:text-4xl">
+            Abrangência Nacional
+          </h2>
+          <p className="mt-5 text-base text-black/70 md:text-lg">
+            Atendemos mais de 3.600 cidades em 14 estados brasileiros, com
+            unidades operacionais estrategicamente posicionadas.
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto mt-14 max-w-5xl px-4 sm:px-6">
+        <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x md:divide-black/5">
+            {/* ACORDEÃO 1: ESTADOS */}
+            <div className="flex flex-col border-b md:border-b-0 border-black/5">
+              <button
+                onClick={() => toggleAccordion("estados")}
+                className="flex w-full items-center justify-between p-6 text-left md:pointer-events-none"
+              >
+                <h3 className="text-lg font-extrabold text-black">
+                  Estados Atendidos
+                </h3>
+                <ChevronDown
+                  className={`h-5 w-5 text-black/40 transition-transform duration-300 md:hidden ${
+                    openAccordion === "estados" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <div
+                className={`overflow-hidden transition-all duration-300 md:max-h-none ${
+                  openAccordion === "estados" ? "max-h-125" : (
+                    "max-h-0 md:max-h-full"
+                  )
+                }`}
+              >
+                <ul className="grid grid-cols-1 gap-y-3 p-6 pt-0 text-sm text-black/80 sm:grid-cols-2">
+                  {estados.map((estado) => (
+                    <li key={estado} className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-black/70" />
+                      {estado}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* ACORDEÃO 2: ROTAS */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => toggleAccordion("rotas")}
+                className="flex w-full items-center justify-between p-6 text-left md:pointer-events-none"
+              >
+                <h3 className="text-lg font-extrabold text-black">
+                  Principais Rotas
+                </h3>
+                <ChevronDown
+                  className={`h-5 w-5 text-black/40 transition-transform duration-300 md:hidden ${
+                    openAccordion === "rotas" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <div
+                className={`overflow-hidden transition-all duration-300 md:max-h-none ${
+                  openAccordion === "rotas" ? "max-h-125" : (
+                    "max-h-0 md:max-h-full"
+                  )
+                }`}
+              >
+                <ul className="space-y-3 p-6 pt-0 text-sm text-black/80">
+                  {rotas.map((rota) => (
+                    <li key={rota} className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-black/70" />
+                      {rota}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function HomePage() {
   const heroImages = [
@@ -30,52 +158,54 @@ export default function HomePage() {
           <HeroCarousel images={heroImages} intervalMs={4500} />
 
           {/* overlays */}
-          <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-black/20" />
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/75 via-black/45 to-black/25" />
 
           {/* CONTENT */}
-          <div className="relative mx-auto grid min-h-140 max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-2">
+          <div className="relative mx-auto grid min-h-[90vh] max-w-7xl grid-cols-1 items-center gap-10 px-4 py-14 sm:px-6 lg:min-h-160 lg:grid-cols-2">
             {/* LEFT */}
             <div className="text-white">
-              <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
+              <h1 className="text-3xl font-extrabold leading-tight sm:text-5xl">
                 Logística de Confiança
               </h1>
 
-              <h2 className="mt-3 text-3xl font-extrabold text-white/80 sm:text-4xl">
+              <h2 className="mt-3 text-2xl font-extrabold text-white/80 sm:text-4xl">
                 Otaviano Transportes Ltda
               </h2>
 
-              <p className="mt-6 max-w-xl text-xl leading-relaxed text-white/90">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-xl">
                 Seu parceiro especialista em transporte de cargas fracionadas e
                 lotação, garantindo segurança e pontualidade em todo o país.
               </p>
 
-              <ul className="mt-8 flex flex-wrap items-center gap-8 text-md text-white/90">
-                <li className="flex items-center gap-2">
-                  <Shield className="h-6 w-6 text-stone-300" />
+              {/* FEATURES */}
+              <ul className="mt-7 flex flex-wrap gap-3 text-sm text-white/90 sm:gap-4">
+                <li className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
+                  <Shield className="h-4 w-4 text-stone-200" />
                   Segurança Reforçada
                 </li>
-                <li className="flex items-center gap-2">
-                  <Clock3 className="h-6 w-6 text-stone-300" />
+                <li className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
+                  <Clock3 className="h-4 w-4 text-stone-200" />
                   Entregas Pontuais
                 </li>
-                <li className="flex items-center gap-2">
-                  <Truck className="h-6 w-6 text-stone-300" />
+                <li className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
+                  <Truck className="h-4 w-4 text-stone-200" />
                   Frota Moderna
                 </li>
               </ul>
 
-              <div className="links flex gap-10">
+              {/* BOTÕES */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-6">
                 <Link
                   to="/fretebot"
-                  className="mt-10 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-md font-bold text-white backdrop-blur-sm transition hover:bg-white/15 active:scale-[0.98]"
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-extrabold text-black shadow-lg transition hover:brightness-95 active:scale-[0.98] sm:w-auto"
                 >
                   Solicitar Cotação
                 </Link>
 
                 <Link
                   to="/rastreio"
-                  className="mt-10 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-md font-bold text-white backdrop-blur-sm transition hover:bg-white/15 active:scale-[0.98]"
+                  className="inline-flex w-full items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-sm font-extrabold text-white backdrop-blur-sm transition hover:bg-white/15 active:scale-[0.98] sm:w-auto"
                 >
                   Rastrear Encomenda
                 </Link>
@@ -83,7 +213,7 @@ export default function HomePage() {
             </div>
 
             {/* RIGHT CARD */}
-            <div className="w-full">
+            <div className="hidden w-full lg:block">
               <div className="rounded-2xl bg-white p-6 shadow-2xl">
                 <h3 className="text-xl font-extrabold text-black">
                   Cotação Expressa (24h)
@@ -95,7 +225,8 @@ export default function HomePage() {
                       CEP Origem
                     </label>
                     <input
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/10"
+                      type="number"
+                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="00000-000"
                     />
                   </div>
@@ -105,18 +236,42 @@ export default function HomePage() {
                       CEP Destino
                     </label>
                     <input
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/50"
+                      type="number"
+                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="00000-000"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-semibold text-black/70">
+                      Peso (Kg)
+                    </label>
+                    <input
+                      type="number"
+                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      placeholder="Ex: 100"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-semibold text-black/70">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      placeholder="email@exemplo.com"
                     />
                   </div>
 
                   <div className="flex flex-col gap-2 sm:col-span-2">
                     <label className="text-xs font-semibold text-black/70">
-                      Peso (Kg)
+                      Nota Fiscal
                     </label>
                     <input
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/10"
-                      placeholder="Ex: 100"
+                      type="number"
+                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      placeholder="Ex: 123.456.789"
                     />
                   </div>
 
@@ -129,8 +284,57 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* MOBILE: COTAÇÃO ABAIXO DO HERO */}
+      <section className="mx-auto mt-10 max-w-7xl px-4 pb-10 lg:hidden">
+        <div className="rounded-2xl bg-white p-6 shadow-2xl">
+          <h3 className="text-lg font-extrabold text-black">
+            Cotação Expressa (24h)
+          </h3>
+
+          <div className="mt-6 grid grid-cols-1 gap-4">
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-black/70">
+                CEP Origem
+              </label>
+              <input
+                type="number"
+                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                placeholder="00000-000"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-black/70">
+                CEP Destino
+              </label>
+              <input
+                type="number"
+                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                placeholder="00000-000"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-black/70">
+                Peso (Kg)
+              </label>
+              <input
+                type="number"
+                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                placeholder="Ex: 100"
+              />
+            </div>
+
+            <button className="h-11 w-full rounded-xl bg-black text-sm font-bold text-white transition hover:brightness-110 active:scale-[0.99]">
+              Calcular Frete
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 2 */}
-      <section className="mx-auto max-w-7xl px-6 py-20" id="sobre">
+      <section className="mx-auto my-7 max-w-7xl px-6 py-20" id="sobre">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-extrabold text-black md:text-4xl">
             A Solidez que Move Sua Carga
@@ -146,7 +350,7 @@ export default function HomePage() {
         <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="rounded-2xl bg-black/5 p-10 text-center shadow-sm">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-black text-white">
-              <Target className="h-6 w-6" />
+              <Target className="h-8 w-8" />
             </div>
             <h3 className="mt-6 text-xl font-bold">Missão</h3>
             <p className="mt-4 text-sm leading-relaxed text-black/80">
@@ -157,7 +361,7 @@ export default function HomePage() {
 
           <div className="rounded-2xl bg-black/5 p-10 text-center shadow-sm">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-black text-white">
-              <Eye className="h-6 w-6" />
+              <Eye className="h-8 w-8" />
             </div>
             <h3 className="mt-6 text-xl font-bold">Visão</h3>
             <p className="mt-4 text-sm leading-relaxed text-black/80">
@@ -169,7 +373,7 @@ export default function HomePage() {
 
           <div className="rounded-2xl bg-black/5 p-10 text-center shadow-sm">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-black text-white">
-              <Heart className="h-6 w-6" />
+              <Heart className="h-8 w-8" />
             </div>
             <h3 className="mt-6 text-xl font-bold">Valores</h3>
             <p className="mt-4 text-sm leading-relaxed text-black/80">
@@ -194,7 +398,7 @@ export default function HomePage() {
 
           <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
             {/* CARD 1 */}
-            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-white">
                   <Package className="h-6 w-6" />
@@ -228,7 +432,7 @@ export default function HomePage() {
             </div>
 
             {/* CARD 2 */}
-            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-white">
                   <Truck className="h-6 w-6" />
@@ -262,7 +466,7 @@ export default function HomePage() {
             </div>
 
             {/* CARD 3 */}
-            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <div className="group rounded-2xl border border-black/10 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-white">
                   <Wrench className="h-6 w-6" />
@@ -298,123 +502,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-7xl px-6 mt-20">
-          <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-3xl font-extrabold text-black md:text-4xl">
-              Abrangência Nacional
-            </h2>
-            <p className="mt-5 text-base text-black/70 md:text-lg">
-              Atendemos mais de 3.600 cidades em 14 estados brasileiros, com
-              unidades operacionais estrategicamente posicionadas para garantir
-              a sua entrega.
-            </p>
-          </div>
-        </div>
-        <div className="mx-auto mt-14 max-w-5xl">
-          <div className="rounded-2xl border border-black/10 bg-white p-10 shadow-md">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-              {/* LEFT */}
-              <div>
-                <h3 className="text-lg font-extrabold text-black">
-                  Estados Atendidos
-                </h3>
-
-                <ul className="mt-6 grid grid-cols-1 gap-y-3 text-sm text-black/80 sm:grid-cols-2">
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Rio de Janeiro
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    São Paulo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Minas Gerais
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Espírito Santo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Bahia
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Goiás
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Distrito Federal
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Paraná
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Santa Catarina
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Rio Grande do Sul
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Mato Grosso
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Mato Grosso do Sul
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Tocantins
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Sergipe
-                  </li>
-                </ul>
-              </div>
-
-              {/* RIGHT */}
-              <div>
-                <h3 className="text-lg font-extrabold text-black">
-                  Principais Rotas
-                </h3>
-
-                <ul className="mt-6 space-y-3 text-sm text-black/80">
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Rio de Janeiro ↔ São Paulo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Belo Horizonte ↔ Vitória
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Salvador ↔ Brasília
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Curitiba ↔ Porto Alegre
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                    Goiânia ↔ Campo Grande
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-black/70" />E
-                    muitas outras rotas
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AbrangenciaSection />
       </section>
 
       {/* SECTION 4 */}
@@ -452,8 +540,12 @@ export default function HomePage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/40" />
                   <input
-                    className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/10"
+                    className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/15 focus:placeholder:text-black/70 hidden lg:block"
                     placeholder="Digite o número da Nota Fiscal ou CT-e"
+                  />
+                  <input
+                    className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/15 focus:placeholder:text-black/70 lg:hidden"
+                    placeholder="Digite a Nota Fiscal ou CT-e"
                   />
                 </div>
 
