@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import api from "../../api/apiClient";
+import axios from "axios";
 
 export function AbrangenciaSection() {
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -162,25 +163,29 @@ export default function HomePage() {
   const [notaFiscal, setNotaFiscal] = useState("");
 
   const handleRastrearEnvio = async (e: React.MouseEvent) => {
-    e.preventDefault(); // Evita a navegação do Link se o campo estiver vazio
+    e.preventDefault();
 
-    if (!notaFiscal) {
+    if (!notaFiscal.trim()) {
       alert("Por favor, digite o número da Nota Fiscal ou CT-e.");
       return;
     }
 
+    // Restrição: Remove caracteres especiais e padroniza para maiúsculas (Ex: NF1553)
+    const cleanTrackCode = notaFiscal
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .toUpperCase();
+
     try {
-      const response = await api.post("/enviar-rastreio", {
-        notaFiscal: notaFiscal,
+      await api.post("/enviar-rastreio", {
+        notaFiscal: cleanTrackCode,
       });
 
-      if (response.data.success) {
-        alert(
-          "Solicitação de rastreio enviada! Verifique seu e-mail em breve.",
-        );
-        setNotaFiscal("");
-      }
-    } catch (error) {
+      // O template de e-mail agora exibirá o código limpo centralizado
+      alert(
+        `Solicitação de rastreio para a nota ${cleanTrackCode} enviada! Verifique seu e-mail.`,
+      );
+      setNotaFiscal("");
+    } catch (error: any) {
       console.error("Erro ao solicitar rastreio:", error);
       alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
     }
@@ -292,11 +297,14 @@ export default function HomePage() {
                       name="cepOrigem"
                       value={formData.cepOrigem}
                       onChange={handleChange}
-                      type="text"
+                      inputMode="numeric"
+                      pattern="\d{5}-?\d{3}"
+                      maxLength={9}
+                      placeholder="00000-000"
                       className="h-11 rounded-xl border border-black/10
                   bg-white px-4 text-sm outline-none placeholder:text-black/50
                   focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="00000-000"
+                      required
                     />
                   </div>
 
@@ -308,11 +316,14 @@ export default function HomePage() {
                       name="cepDestino"
                       value={formData.cepDestino}
                       onChange={handleChange}
-                      type="text"
+                      inputMode="numeric"
+                      pattern="\d{5}-?\d{3}"
+                      maxLength={9}
+                      placeholder="00000-000"
                       className="h-11 rounded-xl border border-black/10
                   bg-white px-4 text-sm outline-none placeholder:text-black/50
                   focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="00000-000"
+                      required
                     />
                   </div>
 
@@ -325,10 +336,14 @@ export default function HomePage() {
                       value={formData.cargaPeso}
                       onChange={handleChange}
                       type="number"
+                      min={0.1}
+                      max={100000}
+                      step={0.01}
+                      required
                       className="h-11 rounded-xl border border-black/10
                   bg-white px-4 text-sm outline-none placeholder:text-black/50
                   focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="Ex: 100"
+                      placeholder="Ex: 23134.32"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -340,9 +355,11 @@ export default function HomePage() {
                       value={formData.email}
                       onChange={handleChange}
                       type="email"
+                      maxLength={120}
                       className="h-11 rounded-xl border border-black/10
                   bg-white px-4 text-sm outline-none placeholder:text-black/50
                   focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      required
                       placeholder="email@exemplo.com"
                     />
                   </div>
@@ -355,11 +372,12 @@ export default function HomePage() {
                       name="valorNota"
                       value={formData.valorNota}
                       onChange={handleChange}
-                      type="number"
+                      type="text"
+                      required
                       className="h-11 rounded-xl border border-black/10
                   bg-white px-4 text-sm outline-none placeholder:text-black/50
                   focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="Ex: 123.456.789"
+                      placeholder="Ex: 98370.07"
                     />
                   </div>
 
@@ -630,12 +648,15 @@ export default function HomePage() {
                 {/* input */}
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/40" />
+                  {/* desktop input */}
                   <input
                     value={notaFiscal}
                     onChange={(e) => setNotaFiscal(e.target.value)}
                     className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/15 focus:placeholder:text-black/70 hidden lg:block"
                     placeholder="Digite o número da Nota Fiscal ou CT-e"
                   />
+
+                  {/* mobile input */}
                   <input
                     value={notaFiscal}
                     onChange={(e) => setNotaFiscal(e.target.value)}

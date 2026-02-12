@@ -29,7 +29,7 @@ class EmailController extends Controller
             'telefone'    => 'required|string',
         ]);
 
-        Mail::to('lyipe32@gmail.com')->send(new contentMail($data));
+        Mail::to('chlovekkj@gmail.com')->send(new contentMail($data));
 
         return response()->json([
             'success' => true,
@@ -46,7 +46,7 @@ class EmailController extends Controller
             'email'       => 'required|email',
         ]);
 
-        Mail::to('lyipe32@gmail.com')->send(new expressoMail($data));
+        Mail::to('chlovekkj@gmail.com')->send(new expressoMail($data));
 
 
         return response()->json([
@@ -60,7 +60,7 @@ class EmailController extends Controller
             'notaFiscal'   => 'required|string',
         ]);
 
-        Mail::to('lyipe32@gmail.com')->send(new rastreioMail($data));
+        Mail::to('chlovekkj@gmail.com')->send(new rastreioMail($data));
         return response()->json([
             'success' => true,
             'message' => 'Email enviado com sucesso'

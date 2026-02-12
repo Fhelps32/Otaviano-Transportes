@@ -5,35 +5,51 @@ import {
   MapPin,
   Bell,
   FileText,
+  Loader2,
 } from "lucide-react";
 import { useState } from "react";
+import axios from "axios";
 import api from "../../api/apiClient";
 
 export default function TrackPage() {
   const [notaFiscal, setNotaFiscal] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleRastrearEnvio = async (e: React.MouseEvent) => {
-    e.preventDefault(); // Evita a navegação do Link se o campo estiver vazio
+  const handleRastrearEnvio = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    if (!notaFiscal) {
+    if (!notaFiscal.trim()) {
       alert("Por favor, digite o número da Nota Fiscal ou CT-e.");
       return;
     }
 
+    const cleanCode = notaFiscal.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+
+    setLoading(true);
+
     try {
-      const response = await api.post("/enviar-rastreio", {
-        notaFiscal: notaFiscal,
+      await api.post("/enviar-rastreio", {
+        notaFiscal: cleanCode,
       });
 
-      if (response.data.success) {
-        alert(
-          "Solicitação de rastreio enviada! Verifique seu e-mail em breve.",
-        );
-        setNotaFiscal("");
-      }
+      alert(
+        "Solicitação recebida! Nossa equipe verificará o status da nota " +
+          cleanCode +
+          " e enviará para seu e-mail.",
+      );
+      setNotaFiscal("");
     } catch (error) {
       console.error("Erro ao solicitar rastreio:", error);
-      alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
+      const msg = axios.isAxiosError(error)
+        ? error.response?.data?.message
+        : "Erro ao processar o rastreio. Tente novamente mais tarde.";
+      alert(
+        typeof msg === "string"
+          ? msg
+          : "Erro ao processar o rastreio. Tente novamente mais tarde.",
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,21 +62,25 @@ export default function TrackPage() {
             Rastreamento de Cargas
           </h1>
           <p className="mt-4 text-lg text-black/60">
-            Acompanhe sua encomenda em tempo real com nosso sistema de
-            rastreamento
+            Acompanhe sua encomenda da <strong>Otaviano Transportes</strong> em
+            tempo real.
           </p>
         </div>
       </section>
 
-      {/* SECTION 2 */}
+      {/* SECTION 2 - FORMULÁRIO */}
       <section className="mx-auto max-w-4xl px-6">
-        <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
+        <form
+          onSubmit={handleRastrearEnvio}
+          className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm"
+        >
           <div className="flex items-center gap-2 mb-4">
             <Search className="h-5 w-5 text-black" />
             <h2 className="text-lg font-bold text-black">Consultar Envio</h2>
           </div>
           <p className="text-sm text-black/60 mb-6">
-            Digite o número da sua Nota Fiscal, CT-e ou código de rastreamento
+            Digite o número da sua Nota Fiscal ou a chave do CT-e (apenas
+            números e letras)
           </p>
 
           <div className="flex flex-col md:flex-row gap-3">
@@ -68,17 +88,25 @@ export default function TrackPage() {
               value={notaFiscal}
               onChange={(e) => setNotaFiscal(e.target.value)}
               type="text"
-              placeholder="Ex: OT2024001234, 12345678901 ou NF123456"
-              className="flex-1 h-12 rounded-xl border border-black/10 bg-gray-50 px-4 text-sm outline-none focus:border-black/30 focus:ring-4 focus:ring-black/5 transition-all"
+              placeholder="Ex: 414706 ou NF1553"
+              className="flex-1 h-12 rounded-xl border border-black/10 bg-gray-50 px-4 text-sm outline-none focus:border-black/30 focus:ring-4 focus:ring-black/5 transition-all uppercase"
             />
             <button
-              onClick={handleRastrearEnvio}
-              className="h-12 px-8 rounded-xl bg-black text-white font-bold transition hover:brightness-110 active:scale-[0.98]"
+              type="submit"
+              disabled={loading}
+              className="h-12 px-8 rounded-xl bg-black text-white font-bold transition hover:brightness-110 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              Rastrear
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Buscando...
+                </>
+              ) : (
+                "Rastrear"
+              )}
             </button>
           </div>
-        </div>
+        </form>
       </section>
 
       {/* SECTION 3 */}
