@@ -6,8 +6,37 @@ import {
   Bell,
   FileText,
 } from "lucide-react";
+import { useState } from "react";
+import api from "../../api/apiClient";
 
 export default function TrackPage() {
+  const [notaFiscal, setNotaFiscal] = useState("");
+
+  const handleRastrearEnvio = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Evita a navegação do Link se o campo estiver vazio
+
+    if (!notaFiscal) {
+      alert("Por favor, digite o número da Nota Fiscal ou CT-e.");
+      return;
+    }
+
+    try {
+      const response = await api.post("/enviar-rastreio", {
+        notaFiscal: notaFiscal,
+      });
+
+      if (response.data.success) {
+        alert(
+          "Solicitação de rastreio enviada! Verifique seu e-mail em breve.",
+        );
+        setNotaFiscal("");
+      }
+    } catch (error) {
+      console.error("Erro ao solicitar rastreio:", error);
+      alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
+    }
+  };
+
   return (
     <main className="w-full bg-white min-h-screen">
       {/* SECTION 1 */}
@@ -36,11 +65,16 @@ export default function TrackPage() {
 
           <div className="flex flex-col md:flex-row gap-3">
             <input
+              value={notaFiscal}
+              onChange={(e) => setNotaFiscal(e.target.value)}
               type="text"
               placeholder="Ex: OT2024001234, 12345678901 ou NF123456"
               className="flex-1 h-12 rounded-xl border border-black/10 bg-gray-50 px-4 text-sm outline-none focus:border-black/30 focus:ring-4 focus:ring-black/5 transition-all"
             />
-            <button className="h-12 px-8 rounded-xl bg-black text-white font-bold transition hover:brightness-110 active:scale-[0.98]">
+            <button
+              onClick={handleRastrearEnvio}
+              className="h-12 px-8 rounded-xl bg-black text-white font-bold transition hover:brightness-110 active:scale-[0.98]"
+            >
               Rastrear
             </button>
           </div>

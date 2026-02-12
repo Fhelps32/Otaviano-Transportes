@@ -13,3 +13,4 @@
 <h2><strong>CPF/CNPJ:</strong> {{ $data['cpf'] }}</h2>
 <h2><strong>EMAIL:</strong> {{ $data['email'] }}</h2>
 <h2><strong>TELEFONE:</strong> {{ $data['telefone'] }}</h2>
+    

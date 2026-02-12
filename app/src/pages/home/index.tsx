@@ -15,6 +15,7 @@ import {
   PackageCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import api from "../../api/apiClient";
 
 export function AbrangenciaSection() {
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -86,9 +87,9 @@ export function AbrangenciaSection() {
 
               <div
                 className={`overflow-hidden transition-all duration-300 md:max-h-none ${
-                  openAccordion === "estados" ? "max-h-125" : (
-                    "max-h-0 md:max-h-full"
-                  )
+                  openAccordion === "estados"
+                    ? "max-h-125"
+                    : "max-h-0 md:max-h-full"
                 }`}
               >
                 <ul className="grid grid-cols-1 gap-y-3 p-6 pt-0 text-sm text-black/80 sm:grid-cols-2">
@@ -120,9 +121,9 @@ export function AbrangenciaSection() {
 
               <div
                 className={`overflow-hidden transition-all duration-300 md:max-h-none ${
-                  openAccordion === "rotas" ? "max-h-125" : (
-                    "max-h-0 md:max-h-full"
-                  )
+                  openAccordion === "rotas"
+                    ? "max-h-125"
+                    : "max-h-0 md:max-h-full"
                 }`}
               >
                 <ul className="space-y-3 p-6 pt-0 text-sm text-black/80">
@@ -148,6 +149,69 @@ export default function HomePage() {
     "https://images.unsplash.com/photo-1485575301924-6891ef935dcd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://images.unsplash.com/photo-1745956983820-6e960f7e8472?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
+
+  // Estado para os campos do formulário
+  const [formData, setFormData] = useState({
+    cepOrigem: "",
+    cepDestino: "",
+    cargaPeso: "",
+    email: "",
+    valorNota: "",
+  });
+
+  const [notaFiscal, setNotaFiscal] = useState("");
+
+  const handleRastrearEnvio = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Evita a navegação do Link se o campo estiver vazio
+
+    if (!notaFiscal) {
+      alert("Por favor, digite o número da Nota Fiscal ou CT-e.");
+      return;
+    }
+
+    try {
+      const response = await api.post("/enviar-rastreio", {
+        notaFiscal: notaFiscal,
+      });
+
+      if (response.data.success) {
+        alert(
+          "Solicitação de rastreio enviada! Verifique seu e-mail em breve.",
+        );
+        setNotaFiscal("");
+      }
+    } catch (error) {
+      console.error("Erro ao solicitar rastreio:", error);
+      alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
+    }
+  };
+
+  // Função para atualizar os campos
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCalcularFrete = async () => {
+    try {
+      // O endpoint mapeado no seu Laravel é /enviar-expresso
+      const response = await api.post("/enviar-expresso", {
+        cepOrigem: formData.cepOrigem,
+        cepDestino: formData.cepDestino,
+        cargaPeso: parseFloat(formData.cargaPeso),
+        valorNota: formData.valorNota,
+        email: formData.email,
+      });
+
+      if (response.data.success) {
+        alert("Solicitação de cotação enviada com sucesso!");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar cotação:", error);
+      alert(
+        "Falha ao enviar a cotaation. Verifique os dados e tente novamente.",
+      );
+    }
+  };
 
   return (
     <main className="w-full">
@@ -225,8 +289,13 @@ export default function HomePage() {
                       CEP Origem
                     </label>
                     <input
-                      type="number"
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      name="cepOrigem"
+                      value={formData.cepOrigem}
+                      onChange={handleChange}
+                      type="text"
+                      className="h-11 rounded-xl border border-black/10
+                  bg-white px-4 text-sm outline-none placeholder:text-black/50
+                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="00000-000"
                     />
                   </div>
@@ -236,8 +305,13 @@ export default function HomePage() {
                       CEP Destino
                     </label>
                     <input
-                      type="number"
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      name="cepDestino"
+                      value={formData.cepDestino}
+                      onChange={handleChange}
+                      type="text"
+                      className="h-11 rounded-xl border border-black/10
+                  bg-white px-4 text-sm outline-none placeholder:text-black/50
+                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="00000-000"
                     />
                   </div>
@@ -247,19 +321,28 @@ export default function HomePage() {
                       Peso (Kg)
                     </label>
                     <input
+                      name="cargaPeso"
+                      value={formData.cargaPeso}
+                      onChange={handleChange}
                       type="number"
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      className="h-11 rounded-xl border border-black/10
+                  bg-white px-4 text-sm outline-none placeholder:text-black/50
+                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="Ex: 100"
                     />
                   </div>
-
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-semibold text-black/70">
                       Email
                     </label>
                     <input
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       type="email"
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      className="h-11 rounded-xl border border-black/10
+                  bg-white px-4 text-sm outline-none placeholder:text-black/50
+                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="email@exemplo.com"
                     />
                   </div>
@@ -269,13 +352,21 @@ export default function HomePage() {
                       Nota Fiscal
                     </label>
                     <input
+                      name="valorNota"
+                      value={formData.valorNota}
+                      onChange={handleChange}
                       type="number"
-                      className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
+                      className="h-11 rounded-xl border border-black/10
+                  bg-white px-4 text-sm outline-none placeholder:text-black/50
+                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
                       placeholder="Ex: 123.456.789"
                     />
                   </div>
 
-                  <button className="mt-2 h-11 w-full rounded-xl bg-black text-sm font-bold text-white transition hover:brightness-110 active:scale-[0.99] sm:col-span-2">
+                  <button
+                    onClick={handleCalcularFrete}
+                    className="mt-2 h-11 w-full rounded-xl bg-black text-sm font-bold text-white transition hover:brightness-110 active:scale-[0.99] sm:col-span-2"
+                  >
                     Calcular Frete
                   </button>
                 </div>
@@ -540,23 +631,27 @@ export default function HomePage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black/40" />
                   <input
+                    value={notaFiscal}
+                    onChange={(e) => setNotaFiscal(e.target.value)}
                     className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/15 focus:placeholder:text-black/70 hidden lg:block"
                     placeholder="Digite o número da Nota Fiscal ou CT-e"
                   />
                   <input
+                    value={notaFiscal}
+                    onChange={(e) => setNotaFiscal(e.target.value)}
                     className="h-12 w-full rounded-2xl border border-black/10 bg-white pl-12 pr-4 text-sm outline-none placeholder:text-black/40 focus:border-black/30 focus:ring-4 focus:ring-black/15 focus:placeholder:text-black/70 lg:hidden"
                     placeholder="Digite a Nota Fiscal ou CT-e"
                   />
                 </div>
 
                 {/* button */}
-                <Link
-                  to="/rastreio"
+                <button
+                  onClick={handleRastrearEnvio}
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-black px-6 text-sm font-extrabold text-white shadow-lg transition hover:brightness-110 active:scale-[0.99]"
                 >
                   <Search className="h-5 w-5" />
                   Acompanhar Envio
-                </Link>
+                </button>
               </div>
 
               {/* helper text */}
