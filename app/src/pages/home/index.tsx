@@ -16,12 +16,11 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import api from "../../api/apiClient";
-import axios from "axios";
 
 export function AbrangenciaSection() {
-  const [openAccordion, setOpenAccordion] = useState(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
-  const toggleAccordion = (id) => {
+  const toggleAccordion = (id: string) => {
     if (window.innerWidth < 768) {
       setOpenAccordion(openAccordion === id ? null : id);
     }
@@ -185,7 +184,7 @@ export default function HomePage() {
         `Solicitação de rastreio para a nota ${cleanTrackCode} enviada! Verifique seu e-mail.`,
       );
       setNotaFiscal("");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erro ao solicitar rastreio:", error);
       alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
     }
