@@ -18,10 +18,10 @@ class EmailController extends Controller
         $data = $request->validate([
             'cepOrigem'   => 'required|string',
             'cepDestino'  => 'required|string',
-            'cargaPeso'   => 'required|numeric|min:0',
-            'cubagem'     => 'required|numeric|min:0',
-            'qtdVolumes'  => 'required|integer|min:1',
-            'valorNota'   => 'required|numeric|min:0',
+            'cargaPeso'   => 'required|string',
+            'cubagem'     => 'required|string',
+            'qtdVolumes'  => 'required|string',
+            'valorNota'   => 'required|string',
             'tipo'        => 'required|string',
             'nome'        => 'required|string',
             'cpf'         => 'required|string',
@@ -29,7 +29,7 @@ class EmailController extends Controller
             'telefone'    => 'required|string',
         ]);
 
-        Mail::to('chlovekkj@gmail.com')->send(new contentMail($data));
+        Mail::to('lyipe32@gmail.com')->send(new contentMail($data));
 
         return response()->json([
             'success' => true,
@@ -41,12 +41,12 @@ class EmailController extends Controller
         $data = $request->validate([
             'cepOrigem'   => 'required|string',
             'cepDestino'  => 'required|string',
-            'cargaPeso'   => 'required|numeric|min:0',
-            'valorNota'   => 'required|string|min:0',
+            'cargaPeso'   => 'required|string',
+            'valorNota'   => 'required|string',
             'email'       => 'required|email',
         ]);
 
-        Mail::to('chlovekkj@gmail.com')->send(new expressoMail($data));
+        Mail::to('lyipe32@gmail.com')->send(new expressoMail($data));
 
 
         return response()->json([
@@ -60,7 +60,7 @@ class EmailController extends Controller
             'notaFiscal'   => 'required|string',
         ]);
 
-        Mail::to('chlovekkj@gmail.com')->send(new rastreioMail($data));
+        Mail::to('lyipe32@gmail.com')->send(new rastreioMail($data));
         return response()->json([
             'success' => true,
             'message' => 'Email enviado com sucesso'

@@ -201,7 +201,7 @@ export default function HomePage() {
       const response = await api.post("/enviar-expresso", {
         cepOrigem: formData.cepOrigem,
         cepDestino: formData.cepDestino,
-        cargaPeso: parseFloat(formData.cargaPeso),
+        cargaPeso: formData.cargaPeso,
         valorNota: formData.valorNota,
         email: formData.email,
       });
@@ -296,7 +296,7 @@ export default function HomePage() {
                       name="cepOrigem"
                       value={formData.cepOrigem}
                       onChange={handleChange}
-                      inputMode="numeric"
+                      inputMode="text"
                       pattern="\d{5}-?\d{3}"
                       maxLength={9}
                       placeholder="00000-000"
@@ -315,7 +315,7 @@ export default function HomePage() {
                       name="cepDestino"
                       value={formData.cepDestino}
                       onChange={handleChange}
-                      inputMode="numeric"
+                      inputMode="text"
                       pattern="\d{5}-?\d{3}"
                       maxLength={9}
                       placeholder="00000-000"
@@ -334,7 +334,7 @@ export default function HomePage() {
                       name="cargaPeso"
                       value={formData.cargaPeso}
                       onChange={handleChange}
-                      type="number"
+                      type="text"
                       min={0.1}
                       max={100000}
                       step={0.01}
