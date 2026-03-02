@@ -213,8 +213,6 @@ export default function ContactPage() {
 
       {/* SECTION 5 */}
       <FaqSection />
-
-      <button>Trabalhe Conosco</button>
     </main>
   );
 }
