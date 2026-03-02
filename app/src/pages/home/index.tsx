@@ -33,24 +33,15 @@ export function AbrangenciaSection() {
     "São Paulo",
     "Minas Gerais",
     "Espírito Santo",
-    "Bahia",
-    "Goiás",
-    "Distrito Federal",
-    "Paraná",
     "Santa Catarina",
-    "Rio Grande do Sul",
-    "Mato Grosso",
-    "Mato Grosso do Sul",
-    "Tocantins",
-    "Sergipe",
   ];
 
   const rotas = [
     "Rio de Janeiro ↔ São Paulo",
-    "Belo Horizonte ↔ Vitória",
-    "Salvador ↔ Brasília",
-    "Curitiba ↔ Porto Alegre",
-    "Goiânia ↔ Campo Grande",
+    "Rio de Janeiro ↔ Vitória",
+    "São Paulo ↔ Minas Gerais",
+    "São Paulo ↔ Vitória",
+    "Espírito Santo ↔ Minas Gerais",
     "E muitas outras rotas",
   ];
 
@@ -62,7 +53,7 @@ export function AbrangenciaSection() {
             Abrangência Nacional
           </h2>
           <p className="mt-5 text-base text-black/70 md:text-lg">
-            Atendemos mais de 3.600 cidades em 14 estados brasileiros, com
+            Atendemos mais de 1900 cidades em 5 estados brasileiros, com
             unidades operacionais estrategicamente posicionadas.
           </p>
         </div>
