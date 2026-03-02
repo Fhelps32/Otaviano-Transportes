@@ -37,10 +37,18 @@ export default function Footer() {
             <h4 className="mb-6 text-md font-extrabold text-black">Serviços</h4>
 
             <ul className="space-y-3 text-sm text-black/70">
-              <li>Carga Fracionada</li>
-              <li>Carga Lotação</li>
-              <li>Logística Integrada</li>
-              <li>Cotação Online</li>
+              <li>
+                <Link to="/servicos">Carga Fracionada</Link>
+              </li>
+              <li>
+                <Link to="/servicos">Carga Lotação</Link>
+              </li>
+              <li>
+                <Link to="/servicos">Logística Integrada</Link>
+              </li>
+              <li>
+                <Link to="/fretebot">Cotação Online</Link>
+              </li>
             </ul>
           </div>
 
@@ -54,8 +62,9 @@ export default function Footer() {
               <li>
                 <Link to="/trabalheconosco">Trabalhe Conosco</Link>
               </li>
-              <li>Política de Privacidade</li>
-              <li>Termos de Uso</li>
+              <li>
+                <Link to="/privacidade">Política de Privacidade</Link>
+              </li>
             </ul>
           </div>
 

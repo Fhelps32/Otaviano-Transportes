@@ -153,9 +153,11 @@ export default function CareersPage() {
                   </ul>
                 </div>
               </div>
-              <button className="mt-6 md:mt-0 bg-black text-white px-8 py-3 rounded-xl font-bold hover:brightness-110 transition active:scale-[0.98]">
-                Candidatar-se
-              </button>
+              <a href="https://wa.me/5524981463045" target="_blank">
+                <button className="mt-6 md:mt-0 bg-black text-white px-8 py-3 rounded-xl hover:cursor-pointer font-bold hover:brightness-110 transition active:scale-[0.98]">
+                  Candidatar-se
+                </button>
+              </a>
             </div>
           ))}
         </div>
@@ -200,13 +202,15 @@ export default function CareersPage() {
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <a
-              href="mailto:rh@otaviano.com.br"
+              href="https://wa.me/5524981463045"
+              target="_blank"
               className="flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-xl font-bold hover:brightness-110 transition"
             >
               <Mail className="h-5 w-5" /> Enviar Currículo por E-mail
             </a>
             <a
               href="https://wa.me/5524981463045"
+              target="_blank"
               className="flex items-center justify-center gap-2 border border-black/10 px-8 py-3 rounded-xl font-bold hover:bg-black/5 transition"
             >
               <MessageCircle className="h-5 w-5" /> WhatsApp RH

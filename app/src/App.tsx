@@ -8,6 +8,8 @@ import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FreteBotPage from "./pages/fretebot";
 import CareersPage from "./pages/careers";
+import PrivatePage from "./pages/private";
+
 import ScrollToTop from "./components/Scroll";
 
 export default function App() {
@@ -23,6 +25,7 @@ export default function App() {
         <Route path="/servicos" element={<ServicesPage />} />
         <Route path="/fretebot" element={<FreteBotPage />} />
         <Route path="/trabalheconosco" element={<CareersPage />} />
+        <Route path="/privacidade" element={<PrivatePage />} />
       </Routes>
       <Footer />
     </>
