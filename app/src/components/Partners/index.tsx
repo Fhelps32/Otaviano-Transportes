@@ -9,6 +9,12 @@ import gelotechImg from "../../assets/carouselPartners/gelo-tech.png";
 import metalLatinaImg from "../../assets/carouselPartners/metal-latina.png";
 import sargentoFerragensImg from "../../assets/carouselPartners/sargento-ferragens.png";
 import tramontinaImg from "../../assets/carouselPartners/tramontina.png";
+import bsoftImg from "../../assets/carouselPartners/bsoft.png";
+import buonnyImg from "../../assets/carouselPartners/buonny.png";
+import efreteImg from "../../assets/carouselPartners/efrete.png";
+import freteBrasImg from "../../assets/carouselPartners/frete-bras.png";
+import qualpImg from "../../assets/carouselPartners/qualp.png";
+import tokioMarineImg from "../../assets/carouselPartners/tokio-marine.png";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -50,6 +56,30 @@ const parceiros = [
   {
     nome: "Tramontina",
     imagem: tramontinaImg,
+  },
+  {
+    nome: "Bsoft",
+    imagem: bsoftImg,
+  },
+  {
+    nome: "Buonny",
+    imagem: buonnyImg,
+  },
+  {
+    nome: "E-frete",
+    imagem: efreteImg,
+  },
+  {
+    nome: "Frete Bras",
+    imagem: freteBrasImg,
+  },
+  {
+    nome: "Qualp",
+    imagem: qualpImg,
+  },
+  {
+    nome: "Tokio Marine",
+    imagem: tokioMarineImg,
   },
 ];
 

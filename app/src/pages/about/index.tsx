@@ -248,40 +248,58 @@ export default function AboutPage() {
               Certificações e Qualidade
             </h3>
 
+            {/* CERTIFICAÇÕES ISO */}
             <div className="mt-10 grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-              <div>
+              {/* ISO 9001 */}
+              <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
                   src="/src/assets/certificates/iso-9001.png"
-                  alt="Certificado ISO 9001"
-                  className="mx-auto h-50 w-50 object-contain"
+                  alt="ISO 9001"
+                  className="mx-auto h-40 object-contain"
                 />
-                <p className="text-lg font-bold">ISO 9001</p>
-                <p className="mt-1 text-sm text-black/70">
-                  Sistema de Gestão da Qualidade
-                </p>
+                <p className="mt-4 text-lg font-bold">ISO 9001</p>
               </div>
 
-              <div>
+              {/* ISO 14001 */}
+              <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
                   src="/src/assets/certificates/iso-14001.png"
-                  alt="Certificado ISO 14001"
-                  className="mx-auto h-50 w-50 object-contain"
+                  alt="ISO 14001"
+                  className="mx-auto h-40 object-contain"
                 />
-                <p className="text-lg font-bold">ISO 14001</p>
-                <p className="mt-1 text-sm text-black/70">Gestão Ambiental</p>
+                <p className="mt-4 text-lg font-bold">ISO 14001</p>
               </div>
 
-              <div>
+              {/* SASSMAQ */}
+              <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
                   src="/src/assets/certificates/sassmaq.png"
-                  alt="Certificado SASSMAQ"
-                  className="mx-auto h-50 w-50 object-contain"
+                  alt="SASSMAQ"
+                  className="mx-auto h-40 object-contain"
                 />
-                <p className="text-lg font-bold">SASSMAQ</p>
-                <p className="mt-1 text-sm text-black/70">
-                  Transporte de Produtos Químicos
-                </p>
+                <p className="mt-4 text-lg font-bold">SASSMAQ</p>
               </div>
+            </div>
+
+            {/* LICENÇAS AMBIENTAIS */}
+            <div className="mt-12 flex flex-wrap justify-center gap-8">
+              <a
+                href="/src/assets/certificates/inea.pdf"
+                download
+                className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <p className="text-lg font-bold">INEA</p>
+                <p className="mt-2 text-xs text-black/60">Clique para baixar</p>
+              </a>
+
+              <a
+                href="/src/assets/certificates/ibama.pdf"
+                download
+                className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <p className="text-lg font-bold">IBAMA</p>
+                <p className="mt-2 text-xs text-black/60">Clique para baixar</p>
+              </a>
             </div>
           </div>
         </div>
