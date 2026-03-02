@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import api from "../../api/apiClient";
 import { Expressoform } from "../../components/Expressoform";
 import { ExpressoformMobile } from "../../components/Expressoform";
+import ParceirosCarousel from "../../components/Partners";
 
 export function AbrangenciaSection() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -298,8 +299,26 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* SECTION 3 */}
+
       <section id="servicos" className="w-full bg-black/3 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-extrabold text-black md:text-4xl">
+              Nossas Empresas Parceiras
+            </h2>
+            <p className="mt-5 text-base text-black/70 md:text-lg">
+              Trabalhamos com as melhores empresas do setor para garantir a
+              máxima qualidade em nossos serviços de transporte e logística.
+              Atualmente, contamos com 12 parcerias e mais de 50 colaboradores.
+            </p>
+          </div>
+        </div>
+
+        <ParceirosCarousel />
+      </section>
+
+      {/* SECTION 3 */}
+      <section id="servicos" className="w-full py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-extrabold text-black md:text-4xl">

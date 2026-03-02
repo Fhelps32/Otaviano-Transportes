@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import FreteBotPage from "./pages/fretebot";
 import CareersPage from "./pages/careers";
 import PrivatePage from "./pages/private";
+import CertificatesPage from "./pages/certificates";
 
 import ScrollToTop from "./components/Scroll";
 
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/fretebot" element={<FreteBotPage />} />
         <Route path="/trabalheconosco" element={<CareersPage />} />
         <Route path="/privacidade" element={<PrivatePage />} />
+        <Route path="/certificados" element={<CertificatesPage />} />
       </Routes>
       <Footer />
     </>

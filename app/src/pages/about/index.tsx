@@ -100,8 +100,8 @@ export default function AboutPage() {
               <h3 className="mt-4 text-lg font-bold">2020</h3>
               <p className="mt-1 font-semibold">Fundação</p>
               <p className="mt-2 text-sm text-black/70">
-                Início das atividades em Barra do Piraí, RJ, com foco no
-                transporte regional.
+                Marco do início das atividades em Barra do Piraí, RJ, com foco,
+                ainda, no transporte regional.
               </p>
             </div>
 
@@ -139,8 +139,8 @@ export default function AboutPage() {
               <h3 className="mt-4 text-lg font-bold">2024</h3>
               <p className="mt-1 font-semibold">Liderança</p>
               <p className="mt-2 text-sm text-black/70">
-                Mais de 500 colaboradores e 200 unidades operacionais em todo o
-                país.
+                3 bases dentro da região sudeste, trabalhando com mais 50
+                colaboradores, trazendo eficiencia e inovações.
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <p className="text-3xl font-extrabold">200+</p>
+                <p className="text-3xl font-extrabold">3+</p>
                 <p className="mt-1 text-sm text-black/70">
                   Unidades Operacionais
                 </p>
@@ -250,6 +250,11 @@ export default function AboutPage() {
 
             <div className="mt-10 grid grid-cols-1 gap-8 text-center md:grid-cols-3">
               <div>
+                <img
+                  src="/src/assets/certificates/iso-9001.png"
+                  alt="Certificado ISO 9001"
+                  className="mx-auto h-50 w-50 object-contain"
+                />
                 <p className="text-lg font-bold">ISO 9001</p>
                 <p className="mt-1 text-sm text-black/70">
                   Sistema de Gestão da Qualidade
@@ -257,11 +262,21 @@ export default function AboutPage() {
               </div>
 
               <div>
+                <img
+                  src="/src/assets/certificates/iso-14001.png"
+                  alt="Certificado ISO 14001"
+                  className="mx-auto h-50 w-50 object-contain"
+                />
                 <p className="text-lg font-bold">ISO 14001</p>
                 <p className="mt-1 text-sm text-black/70">Gestão Ambiental</p>
               </div>
 
               <div>
+                <img
+                  src="/src/assets/certificates/sassmaq.png"
+                  alt="Certificado SASSMAQ"
+                  className="mx-auto h-50 w-50 object-contain"
+                />
                 <p className="text-lg font-bold">SASSMAQ</p>
                 <p className="mt-1 text-sm text-black/70">
                   Transporte de Produtos Químicos
