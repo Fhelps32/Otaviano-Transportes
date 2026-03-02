@@ -283,23 +283,29 @@ export default function AboutPage() {
 
             {/* LICENÇAS AMBIENTAIS */}
             <div className="mt-12 flex flex-wrap justify-center gap-8">
-              <a
-                href="/certificates/inea.pdf"
-                download
-                className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <p className="text-lg font-bold">INEA</p>
-                <p className="mt-2 text-xs text-black/60">Clique para baixar</p>
-              </a>
+              <div className="rounded-xl bg-white p-6 shadow-md">
+                <img
+                  src="/certificates/inea.png"
+                  alt="SASSMAQ"
+                  className="mx-auto h-40 object-contain"
+                />
+                <p className="mt-4 text-lg font-bold text-center">INEA</p>
+                <p className="mt-2 text-xs text-black/60 text-center">
+                  Licença N°: 8375843
+                </p>
+              </div>
 
-              <a
-                href="/certificates/ibama.pdf"
-                download
-                className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <p className="text-lg font-bold">IBAMA</p>
-                <p className="mt-2 text-xs text-black/60">Clique para baixar</p>
-              </a>
+              <div className="rounded-xl bg-white p-6 shadow-md">
+                <img
+                  src="/certificates/ibama.png"
+                  alt="SASSMAQ"
+                  className="mx-auto h-40 object-contain"
+                />
+                <p className="mt-4 text-lg font-bold text-center">IBAMA</p>
+                <p className="mt-2 text-xs text-black/60 text-center">
+                  Registro N°: 8375843
+                </p>
+              </div>
             </div>
           </div>
         </div>
