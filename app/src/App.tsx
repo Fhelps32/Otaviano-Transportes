@@ -8,10 +8,12 @@ import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FreteBotPage from "./pages/fretebot";
 import CareersPage from "./pages/careers";
+import ScrollToTop from "./components/Scroll";
 
 export default function App() {
   return (
     <>
+      <ScrollToTop />
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

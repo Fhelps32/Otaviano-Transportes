@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import api from "../../api/apiClient";
+import { Expressoform } from "../../components/Expressoform";
+import { ExpressoformMobile } from "../../components/Expressoform";
 
 export function AbrangenciaSection() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -150,15 +152,6 @@ export default function HomePage() {
     "https://images.unsplash.com/photo-1745956983820-6e960f7e8472?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
-  // Estado para os campos do formulário
-  const [formData, setFormData] = useState({
-    cepOrigem: "",
-    cepDestino: "",
-    cargaPeso: "",
-    email: "",
-    valorNota: "",
-  });
-
   const [notaFiscal, setNotaFiscal] = useState("");
 
   const handleRastrearEnvio = async (e: React.MouseEvent) => {
@@ -187,33 +180,6 @@ export default function HomePage() {
     } catch (error) {
       console.error("Erro ao solicitar rastreio:", error);
       alert("Erro ao processar o rastreio. Tente novamente mais tarde.");
-    }
-  };
-
-  // Função para atualizar os campos
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleCalcularFrete = async () => {
-    try {
-      // O endpoint mapeado no seu Laravel é /enviar-expresso
-      const response = await api.post("/enviar-expresso", {
-        cepOrigem: formData.cepOrigem,
-        cepDestino: formData.cepDestino,
-        cargaPeso: formData.cargaPeso,
-        valorNota: formData.valorNota,
-        email: formData.email,
-      });
-
-      if (response.data.success) {
-        alert("Solicitação de cotação enviada com sucesso!");
-      }
-    } catch (error) {
-      console.error("Erro ao enviar cotação:", error);
-      alert(
-        "Falha ao enviar a cotaation. Verifique os dados e tente novamente.",
-      );
     }
   };
 
@@ -281,164 +247,14 @@ export default function HomePage() {
             </div>
 
             {/* RIGHT CARD */}
-            <div className="hidden w-full lg:block">
-              <div className="rounded-2xl bg-white p-6 shadow-2xl">
-                <h3 className="text-xl font-extrabold text-black">
-                  Cotação Expressa (24h)
-                </h3>
-
-                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-black/70">
-                      CEP Origem
-                    </label>
-                    <input
-                      name="cepOrigem"
-                      value={formData.cepOrigem}
-                      onChange={handleChange}
-                      inputMode="text"
-                      pattern="\d{5}-?\d{3}"
-                      maxLength={9}
-                      placeholder="00000-000"
-                      className="h-11 rounded-xl border border-black/10
-                  bg-white px-4 text-sm outline-none placeholder:text-black/50
-                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      required
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-black/70">
-                      CEP Destino
-                    </label>
-                    <input
-                      name="cepDestino"
-                      value={formData.cepDestino}
-                      onChange={handleChange}
-                      inputMode="text"
-                      pattern="\d{5}-?\d{3}"
-                      maxLength={9}
-                      placeholder="00000-000"
-                      className="h-11 rounded-xl border border-black/10
-                  bg-white px-4 text-sm outline-none placeholder:text-black/50
-                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      required
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-black/70">
-                      Peso (Kg)
-                    </label>
-                    <input
-                      name="cargaPeso"
-                      value={formData.cargaPeso}
-                      onChange={handleChange}
-                      type="text"
-                      min={0.1}
-                      max={100000}
-                      step={0.01}
-                      required
-                      className="h-11 rounded-xl border border-black/10
-                  bg-white px-4 text-sm outline-none placeholder:text-black/50
-                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="Ex: 23134.32"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold text-black/70">
-                      Email
-                    </label>
-                    <input
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      type="email"
-                      maxLength={120}
-                      className="h-11 rounded-xl border border-black/10
-                  bg-white px-4 text-sm outline-none placeholder:text-black/50
-                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      required
-                      placeholder="email@exemplo.com"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2 sm:col-span-2">
-                    <label className="text-xs font-semibold text-black/70">
-                      Nota Fiscal
-                    </label>
-                    <input
-                      name="valorNota"
-                      value={formData.valorNota}
-                      onChange={handleChange}
-                      type="text"
-                      required
-                      className="h-11 rounded-xl border border-black/10
-                  bg-white px-4 text-sm outline-none placeholder:text-black/50
-                  focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                      placeholder="Ex: 98370.07"
-                    />
-                  </div>
-
-                  <button
-                    onClick={handleCalcularFrete}
-                    className="mt-2 h-11 w-full rounded-xl bg-black text-sm font-bold text-white transition hover:brightness-110 active:scale-[0.99] sm:col-span-2"
-                  >
-                    Calcular Frete
-                  </button>
-                </div>
-              </div>
-            </div>
+            <Expressoform />
           </div>
         </div>
       </section>
 
       {/* MOBILE: COTAÇÃO ABAIXO DO HERO */}
       <section className="mx-auto mt-10 max-w-7xl px-4 pb-10 lg:hidden">
-        <div className="rounded-2xl bg-white p-6 shadow-2xl">
-          <h3 className="text-lg font-extrabold text-black">
-            Cotação Expressa (24h)
-          </h3>
-
-          <div className="mt-6 grid grid-cols-1 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-black/70">
-                CEP Origem
-              </label>
-              <input
-                type="number"
-                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                placeholder="00000-000"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-black/70">
-                CEP Destino
-              </label>
-              <input
-                type="number"
-                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/50 focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                placeholder="00000-000"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-black/70">
-                Peso (Kg)
-              </label>
-              <input
-                type="number"
-                className="h-11 rounded-xl border border-black/10 bg-white px-4 text-sm outline-none placeholder:text-black/30 focus:border-black/30 focus:ring-4 focus:ring-black/15"
-                placeholder="Ex: 100"
-              />
-            </div>
-
-            <button className="h-11 w-full rounded-xl bg-black text-sm font-bold text-white transition hover:brightness-110 active:scale-[0.99]">
-              Calcular Frete
-            </button>
-          </div>
-        </div>
+        <ExpressoformMobile />
       </section>
 
       {/* SECTION 2 */}
