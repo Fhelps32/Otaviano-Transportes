@@ -253,7 +253,7 @@ export default function AboutPage() {
               {/* ISO 9001 */}
               <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
-                  src="/src/assets/certificates/iso-9001.png"
+                  src="/certificates/iso-9001.png"
                   alt="ISO 9001"
                   className="mx-auto h-40 object-contain"
                 />
@@ -263,7 +263,7 @@ export default function AboutPage() {
               {/* ISO 14001 */}
               <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
-                  src="/src/assets/certificates/iso-14001.png"
+                  src="/certificates/iso-14001.png"
                   alt="ISO 14001"
                   className="mx-auto h-40 object-contain"
                 />
@@ -273,7 +273,7 @@ export default function AboutPage() {
               {/* SASSMAQ */}
               <div className="rounded-xl bg-white p-6 shadow-md">
                 <img
-                  src="/src/assets/certificates/sassmaq.png"
+                  src="/certificates/sassmaq.png"
                   alt="SASSMAQ"
                   className="mx-auto h-40 object-contain"
                 />
@@ -284,7 +284,7 @@ export default function AboutPage() {
             {/* LICENÇAS AMBIENTAIS */}
             <div className="mt-12 flex flex-wrap justify-center gap-8">
               <a
-                href="/src/assets/certificates/inea.pdf"
+                href="/certificates/inea.pdf"
                 download
                 className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
               >
@@ -293,7 +293,7 @@ export default function AboutPage() {
               </a>
 
               <a
-                href="/src/assets/certificates/ibama.pdf"
+                href="/certificates/ibama.pdf"
                 download
                 className="w-64 rounded-xl bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg"
               >
