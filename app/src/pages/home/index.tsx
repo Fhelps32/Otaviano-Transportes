@@ -54,7 +54,7 @@ export function AbrangenciaSection() {
             Abrangência Nacional
           </h2>
           <p className="mt-5 text-base text-black/70 md:text-lg">
-            Atendemos mais de 1900 cidades em 5 estados brasileiros, com
+            Atendemos mais de 2.000 cidades em 5 estados brasileiros, com
             unidades operacionais estrategicamente posicionadas.
           </p>
         </div>

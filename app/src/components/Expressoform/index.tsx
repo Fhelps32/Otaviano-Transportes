@@ -59,7 +59,7 @@ function Expressoform() {
     try {
       await api.post("/enviar-expresso", formData);
 
-      alert("Cotação enviada com sucesso! Verifique seu email.");
+      alert("Cotação enviada com sucesso! Nossa equipe entrará em contato.");
     } catch (error: unknown) {
       if (error instanceof Error && "response" in error) {
         const axiosError = error as Error & {
@@ -269,7 +269,7 @@ function ExpressoformMobile() {
     try {
       await api.post("/enviar-expresso", formData);
 
-      alert("Cotação enviada com sucesso! Verifique seu email.");
+      alert("Cotação enviada com sucesso! Nossa equipe entrará em contato.");
     } catch (error: unknown) {
       if (error instanceof Error && "response" in error) {
         const axiosError = error as Error & {

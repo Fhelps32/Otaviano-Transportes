@@ -113,7 +113,7 @@ export default function AboutPage() {
               <h3 className="mt-4 text-lg font-bold">2022</h3>
               <p className="mt-1 font-semibold">Expansão Nacional</p>
               <p className="mt-2 text-sm text-black/70">
-                Ampliação da cobertura para 14 estados, consolidando presença
+                Ampliação da cobertura para 5 estados, consolidando presença
                 nacional.
               </p>
             </div>
@@ -160,12 +160,12 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <p className="text-3xl font-extrabold">3.600+</p>
+                <p className="text-3xl font-extrabold">2.000+</p>
                 <p className="mt-1 text-sm text-black/70">Cidades Atendidas</p>
               </div>
 
               <div>
-                <p className="text-3xl font-extrabold">14</p>
+                <p className="text-3xl font-extrabold">5</p>
                 <p className="mt-1 text-sm text-black/70">
                   Estados de Cobertura
                 </p>
