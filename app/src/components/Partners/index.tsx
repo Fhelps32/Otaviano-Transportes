@@ -15,6 +15,12 @@ import efreteImg from "../../assets/carouselPartners/efrete.png";
 import freteBrasImg from "../../assets/carouselPartners/frete-bras.png";
 import qualpImg from "../../assets/carouselPartners/qualp.png";
 import tokioMarineImg from "../../assets/carouselPartners/tokio-marine.png";
+import egfImg from "../../assets/carouselPartners/egf.jpeg";
+import grattanoImg from "../../assets/carouselPartners/grattano.png";
+import n10Img from "../../assets/carouselPartners/n10.jpeg";
+import vermatImg from "../../assets/carouselPartners/vermat.png";
+import marckSuprimentosImg from "../../assets/carouselPartners/mark-suprimentos.png";
+import engeferImg from "../../assets/carouselPartners/engefer.png";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -80,6 +86,30 @@ const parceiros = [
   {
     nome: "Tokio Marine",
     imagem: tokioMarineImg,
+  },
+  {
+    nome: "EGF Distribuição",
+    imagem: egfImg,
+  },
+  {
+    nome: "Engefer",
+    imagem: engeferImg,
+  },
+  {
+    nome: "Grattano",
+    imagem: grattanoImg,
+  },
+  {
+    nome: "Marck Suprimentos",
+    imagem: marckSuprimentosImg,
+  },
+  {
+    nome: "N10 Parafusos",
+    imagem: n10Img,
+  },
+  {
+    nome: "Vermat",
+    imagem: vermatImg,
   },
 ];
 
